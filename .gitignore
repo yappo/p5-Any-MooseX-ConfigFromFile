@@ -9,3 +9,4 @@ old/
 *.swp
 nytprof/
 nytprof.out
+*.bak
