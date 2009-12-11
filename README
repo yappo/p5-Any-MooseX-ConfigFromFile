@@ -1,0 +1,53 @@
+NAME
+    Any::MooseX::ConfigFromFile - MooseX::ConfigFromFile for Any::Moose
+
+SYNOPSIS
+      ########
+      ## A real role based on this abstract role:
+      ########
+
+      package Any::MooseX::SomeSpecificConfigRole;
+      use Any::Moose '::Role';
+  
+      with 'Any::MooseX::ConfigFromFile';
+  
+      use Some::ConfigFile::Loader ();
+
+      sub get_config_from_file {
+        my ($class, $file) = @_;
+
+        my $options_hashref = Some::ConfigFile::Loader->load($file);
+
+        return $options_hashref;
+      }
+
+
+      ########
+      ## A class that uses it:
+      ########
+      package Foo;
+      use Any::Moose;
+      with 'Any::MooseX::SomeSpecificConfigRole';
+
+      # optionally, default the ConfigFile::Loader  has +configfile ( default => '/tmp/foo.yaml' );
+
+      # ... insert your stuff here ...
+
+      ########
+      ## A script that uses the class with a configfile  ########
+
+      my $obj = Foo->new_with_config(configfile => '/etc/foo.yaml', other_opt => 'foo');
+
+SEE ALSO
+    MooseX::ConfigFromFile
+
+AUTHOR
+    Kazuhiro Osawa <yappo <at> shibuya <döt> pl>
+
+    And MooseX::ConfigFromFile author Brandon L. Black
+
+SEE ALSO
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
